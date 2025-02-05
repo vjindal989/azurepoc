@@ -1,0 +1,17 @@
+variables:
+  ${{ if contains(variables['Build.SourceBranch'], 'hotfix') }}:
+    hotfixVersion: $[replace(variables['Build.SourceBranch'], 'refs/heads/hotfix/v', '')]
+  ${{ if eq(variables['Build.SourceBranchName'], 'develop') }}:
+    buildValue: $[format('{0}-{1}', variables['current'], 'alpha')]
+  ${{ if eq(variables['Build.SourceBranchName'], 'release') }}:
+    buildValue: $[format('{0}-{1}', variables['release'], 'beta')]
+  ${{ if eq(variables['Build.SourceBranchName'], 'master') }}:
+    buildValue: $[format('{0}-{1}', variables['master'], 'stable')]
+  ${{ if contains(variables['Build.SourceBranch'], 'hotfix') }}:
+    buildValue: $[format('{0}-{1}', variables['hotfixVersion'], 'beta')]
+  ${{ if and(notIn(variables['Build.SourceBranchName'], 'develop', 'release', 'master'), not(contains(variables['Build.SourceBranch'], 'hotfix'))) }}:
+    buildValue: $[format('{0}-{1}', variables['current'], 'alpha')]
+  ${{ if eq(variables['Build.SourceBranchName'], 'master') }}:
+    DockerRegistry: PF dev registery
+  ${{ if ne(variables['Build.SourceBranchName'], 'master') }}:
+    DockerRegistry: PF dev registery

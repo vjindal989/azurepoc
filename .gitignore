@@ -1,0 +1,5 @@
+cascades-api.log
+.vscode/
+node_modules/
+logs/
+.env

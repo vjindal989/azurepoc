@@ -1,0 +1,63 @@
+name: $(buildValue)-$(Rev:rr)
+trigger:
+  branches:
+    include:
+      - develop
+      - release
+      - master
+  paths:
+    exclude:
+      - azure-pipelines.yml
+      - vars.yml
+variables:
+- group: NPM Credentials
+- group: Sonarqube Details
+- group: Release Versions
+- template: vars.yml
+- name: VersionNum
+  value: $(Build.BuildNumber)
+stages:
+- stage: build_stage
+  displayName: Build Docker Image Stage
+  jobs:
+  - job: build_cascade_nextgen_client
+    displayName: Build Cascade Nextgen API
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - checkout: self
+      fetchDepth: 1
+    - task: Docker@2
+      displayName: Build Docker Image
+      inputs:
+        command: build
+        containerRegistry: $(DockerRegistry)
+        repository: cascade-nextgen-api
+        Dockerfile: Dockerfile
+        buildContext: .
+        arguments: --build-arg PORT_NUMBER=80
+        tags: $(VersionNum)
+    - task: Docker@2
+      displayName: Publish Docker Image
+      inputs:
+        command: push
+        containerRegistry: $(DockerRegistry)
+        repository: cascade-nextgen-api
+        tags: $(VersionNum)
+- stage: analysis_stage
+  displayName: SonarQube Analysis Cascade Nextgen API Stage
+  jobs:
+  - job: analysis_cascade_nextgen_api
+    displayName: Analysis Cascade Nextgen API
+    pool:
+      name: Windows-Build-Server
+    steps:
+    - checkout: self
+      fetchDepth: 1
+    - task: PowerShell@2
+      displayName: Sonarqube Cascade-NextGen-API Analysis
+      continueOnError: true
+      inputs:
+        targetType: inline
+        script: |
+          sonar-scanner.bat -D project.settings=sonar.properties -D sonar.login="$(AuthToken)" -D sonar.host.url="$(ServerUrl)"
