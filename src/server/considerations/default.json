@@ -1,0 +1,205 @@
+[
+    {
+        "id": 1,
+        "rules": [
+            {
+                "a" : "$.midTarget",
+                "b" : "$..original_request.DesiredRetirementIncome",
+                "comparison" : "<"
+            },
+            {
+                "a" : "Solve for a desired retirement income",
+                "b" : "$..original_request.ReportingMode",
+                "comparison" : "=="
+            }
+        ],
+        "title": "Retirement income needs are not always the same.",
+        "content": "It's natural to assume that retirement expenses will always rise over time because of inflation, but that isn't always the case. For many retirees spending tends to start higher and then slows with age, countering the effects of inflation."
+    }, 
+    {
+        "id": 2,
+        "title": "Take a look at the retirement budget, you might be surprised.",
+        "content": "Using your employment income as a starting point to determine how much retirement income you require can be misleading.  It is well known and generally accepted that you will require less income in your retirement years, but how much less? In making this determination, consider that you no longer have employment income deductions like CPP and employment insurance, retirement savings, costs related to traveling to work, retirement income tax credits, etc. Try using your employment income after these deductions, taxes, and employment expenses and compare that with your projected retirement income."  
+    },
+    {
+        "id": 3,
+        "title": "Don't forget about the equity in your principal residence, it can come in handy.",
+        "content": "Have equity in your principle residence? Try re-running your scenario and accessing your home's equity through either a Home Equity Line of Credit (HELOC) or Reverse Mortgage. Visit the “Advances Settings” to add a future lump sum deposit to your income projection."
+    },
+    {
+        "id": 4,
+        "title": "Try allocating some savings to a life annuity.",
+        "content": "Allocating some of your savings to a life annuity could help you achieve a higher sustainable retirement income. These vehicles are a great way the shift the burden of making your money last forever and can often have attractive capital payout ratios throughout the retirement years due to their risk pooling."
+    },
+    {
+        "id": 5,
+        "title": "You have some annual excess income and no TFSA room, let's talk about permanent life insurance.",
+        "content": "You are fortunate to have built up cash that you will not use in your lifetime. Investing the excess in taxable investment accounts is certainly one option, but consider tax-advantaged permanent life insurance as an alternative. Talk to your advisor about how permanent life insurance can act as an investment portfolio diversifier, and the tax and estate friendly features it offers."
+    },
+    {
+        "id": 6,
+        "rules": [
+            {
+                "a" : 1,
+                "b" : 1,
+                "comparison" : "=="
+            }
+        ],
+        "title": "Try deferring your CPP and/or OAS.",
+        "content": "There is a considerable incentive for deferring your Canada Pension Plan (CPP) and Old Age Security (OAS). You will receive 8.4 percent more every year when delaying your CPP payment beyond age 65. That's a 42% increase by age 70.  For OAS, you receive 7.2% more for each year of deferral beyond age 65, that is 36% if deferred to age 70. Try running your report with delayed CPP & OAS start dates and see if it improves your outcome."
+    },
+    {
+        "id": 7,
+        "rules": [
+            {
+                "a" : 1,
+                "b" : 1,
+                "comparison" : "=="
+            }
+        ],
+        "title": "Investing while withdrawing is different than investing while saving.",
+        "content": "When withdrawing funds on a regular basis for retirement income, the order (or the “sequence”) in which you receive your investment returns can make a significant difference in how long that income lasts. This concept is known as the Sequence of Returns Risk. Protect yourself by reviewing the proportion of fixed income that makes your retirement income and consider the value that segregated funds provide with their death benefit and maturity guarantees."
+    },
+    {
+        "id": 8,
+        "rules": [
+            {
+                "a" : "$..[?(@ && @.PensionIncome>0)]",
+                "b" : 0,
+                "comparison" : ">"
+            }
+        ],
+        "title": "There are many options when leaving an employer pension plan.",
+        "content": "When it comes time to choose among the options to exit your employer's pension plan, review them carefully with your advisor. Some options may allow you to access a $2,000 pension tax credit and split income with your spouse when others may not. Also, if you have concerns regarding your employer's ability to sustain monthly pension payments for the rest of your life, a transfer to a Copycat Annuity provides a pension payment identical to your employers plan, but payments are made by a life insurance company instead."
+    },
+    {
+        "id": 9,
+        "rules": [
+            {
+                "a" : "$..[?(@ && @.RRIFPaymentWithdrawn>0)]",
+                "b" : 0,
+                "comparison" : ">"
+            }
+        ],
+        "title": "When do you convert your RRSP to a RRIF?",
+        "content": "When you reach retirement, a registered retirement savings plan (RRSP) has the option of turning into a registered retirement income fund (RRIF). To provide a sustainable retirement income and minimize your income and estate taxes, we've calculated an average annual RRIF payment of $[RRIF_Pmt1] starting at age [RRIF_Start_Age_1]. At an assumed rate of return of [Risk_Profile_Return]%, this investment will reach $[RRIF_End_Value_1] at age [RRIF_End_Age_1]."
+    },
+    {
+        "id": 10,
+        "rules": [
+            {
+                "a" : "$..[?(@ && @.OASClawback>0)]",
+                "b" : 0,
+                "comparison" : ">"
+            }
+        ],
+        "title": "We found some OAS Clawback in your projection.",
+        "content": "Because of high taxable income levels, we project that you will be required to re-pay some of your Old Age Security (OAS) benefit to the government, known informally as the \"OAS clawback.\" An OAS Clawback situation involves one of the highest effective marginal tax rates experienced by Canadians. Consider reducing the amount of income taken from registered investments over other vehicles and consider investing for capital gains over dividends to reduce your clawback."
+    },
+    {
+        "id": 11,
+        "rules": [
+            {
+                "a" : "$..original_request.c1.Retired",
+                "b" : ["No"],
+                "comparison" : "=="
+            },
+            {
+                "a" : "$..detailedIncomeProjection[?(@ && @.OASClawback>0 && @root.original_request.MAX_AGE===@.Age)]",
+                "b" : 0,
+                "comparison" : ">"
+            }
+        ],
+        "title": "OAS Clawback in Retirement Year",
+        "content": "When a high-income earner first starts receiving the OAS pension, it may be immediately clawed back based on prior tax returns.  If you start receiving your pension in the first 6 months of the year, the amount will be reduced based on your income as per the tax return filed in the 2nd preceding taxation year.  If you start receiving your pension in the last 6 months of the year, the amount will be reduced based on your income as per your tax return filed in the preceding taxation year. You may be able to avoid this first year clawback by submitting an estimate of your reduced retirement income on form T1213-OAS to the Canada Revenue Agency. This should be done in advance of your OAS start date."
+    },
+    {
+        "id": 12,
+        "rules": [
+            {
+                "a" : "$..detailedSavingsProjection[?(@ && @.NonRegisteredSavingsStart>0)]",
+                "b" : 0,
+                "comparison" : ">"
+            }
+        ],
+        "title": "Don't forget to use up your TFSA room every year.",
+        "content": "As new Tax-Free Savings Account (TFSA) contribution room becomes available, you can save income taxes on investment income and have easier access to funds by shifting any taxable (Non-Registered) savings to your TFSA."
+    },
+    {
+        "id": 13,
+        "rules": [
+            {
+                "a" : "$..user_supplied_vars.c1.ProvinceCode",
+                "b" : ["BC", "MB", "NB", "NL", "NS", "ON", "PE", "SK"],
+                "comparison" : "contains"
+            },
+            {
+                "a" : "$..detailedSavingsProjection[?(@ && @.NonRegisteredSavingsEnd>50000)]",
+                "b" : 0,
+                "comparison" : ">"
+            }
+        ],
+        "title": "Taxable non-registered savings can cause probate, here are some ways to avoid it.",
+        "content": "Long term savings that earns taxable investment income are often held in non-registered accounts invested in Guaranteed Investment Certificates (GICs), Stocks, Bonds, Mutual Funds, etc. These types of investment accounts often cause an estate to be probated. If you are in a province like British Columbia or Onterio, consider investing in accounts that allow a right of survivorship or named beneficiary. Some examples include joint savings account, Tax-Free Savings Accounts (TSFAs), segregated funds, or deposits to a permanent life insurance policy."
+    },
+    {
+        "id": 14,
+        "rules": [
+            {
+                "a" : 1,
+                "b" : 1,
+                "comparison" : "=="
+            }
+        ],
+        "title": "Save even more income tax with charitable donations.",
+        "content": "The tax credit system in Canada is very generous to charitable donors. Charitable donations in Canada are eligible for both federal and provincial donation tax credits, with combined incentives of up to 53% in some provinces. You can claim charitable gifts up to an annual limit of 75% of your net income – a number that rises to 100% for gifts made in the year of death and the year before."
+    },
+    {
+        "id": 15,
+        "rules": [
+            {
+                "a" : 1,
+                "b" : 2,
+                "comparison" : "=="
+            }
+        ],
+        "title": "Tax-Free Corporate Withdrawals",
+        "content": "Consideration should be given to the priority of withdrawal from a corporation. If a shareholder previously made a loan to the corporation, consider repaying that loan first before issuing a taxable dividend. Likewise, capital dividends can be paid on a tax-free basis to shareholders. These types of dividend can be paid at the owner's discretion when there is a positive balance in the corporation's Capital Dividend Account (CDA). "
+    },
+    {
+        "id": 16,
+        "rules": [
+            {
+                "a" : 1,
+                "b" : 2,
+                "comparison" : "=="
+            }
+        ],
+        "title": "Maximizing the Small Business Deduction Limit",
+        "content": "As of 2019, the small business deduction (SBD) applied to any operating income is reduced by $5 for each $1 of adjusted aggregate investment income (AAII) that exceeds $50,000 and will reach zero once $150,000 of AAII is earned in a year. Consider investments that lean towards growth rather than annual interest or dividend. Further, since capital gains are only 50% taxable, it would take $100,000 of realized capital gains to generate $50,000 of passive income that is counted towards the AAII test."
+    },
+    {
+        "id": 17,
+        "rules": [
+            {
+                "a" : 1,
+                "b" : 2,
+                "comparison" : "=="
+            }
+        ],
+        "title": "Corporate-Owned Life Insurance",
+        "content": "You can invest after-tax corporate income into a corporate-owned life insurance policy that insures the life of the business owner, a present or future shareholder, or a key person in the organization. Key tax advantages include paying premiums with after-tax corporate dollars, tax-free growth on values within the policy, collateralizing cash values as a tax-preferred source of income, and sheltering passive investment income."
+    },
+    {
+        "id": 18,
+        "rules": [
+            {
+                "a" : 1,
+                "b" : 2,
+                "comparison" : "=="
+            }
+        ],
+        "title": "Corporate Donations",
+        "content": "Consider making a charitable donation from your private corporation rather than by you personally. Not only will your corporation receive a deduction for the donation itself, it will also reduce the funds invested in your corporation reducing adjusted aggregate investment income to preserve access to the small business deduction (where applicable)."
+    }
+]
