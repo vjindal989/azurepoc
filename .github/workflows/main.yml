@@ -43,6 +43,7 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+
       - name: Deploy to Web App
         run: |
           ACR_LOGIN_SERVER=${{ secrets.ACR_NAME }}.azurecr.io
@@ -53,3 +54,4 @@ jobs:
             --resource-group ${{ secrets.RESOURCE_GROUP }} \
             --docker-custom-image-name $IMAGE_NAME \
             --docker-registry-server-url https://$ACR_LOGIN_SERVER
+            
