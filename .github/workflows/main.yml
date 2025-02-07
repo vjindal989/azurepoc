@@ -18,8 +18,8 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           login-server: azurepoc123.azurecr.io
-          username: azurepoc123
-          password: ${{ secrets.REGISTRY_PASSWORD }}
+          client-id: f92d07e0-c470-4941-91d6-094886115b43
+          tenant-id: 89afed49-c2fa-45ce-a866-6e77ca386cd0
 
       - name: Login to Azure Container Registry
         run: |
