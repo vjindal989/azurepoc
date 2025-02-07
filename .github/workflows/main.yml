@@ -17,7 +17,6 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-          login-server: azurepoc123.azurecr.io
           client-id: f92d07e0-c470-4941-91d6-094886115b43
           tenant-id: 89afed49-c2fa-45ce-a866-6e77ca386cd0
 
