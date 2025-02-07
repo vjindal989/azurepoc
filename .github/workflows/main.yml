@@ -17,6 +17,9 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+          login-server: azurepoc123.azurecr.io
+          username: azurepoc123
+          password: ${{ secrets.REGISTRY_PASSWORD }}
 
       - name: Login to Azure Container Registry
         run: |
