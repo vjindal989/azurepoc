@@ -37,6 +37,7 @@ jobs:
           
       - run: |
           az account show --output none
+          az provider register -n Microsoft.App
 
       - name: Deploy to webapp
         uses: azure/container-apps-deploy-action@v1
