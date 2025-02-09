@@ -32,6 +32,10 @@ jobs:
       - name: Azure Login Web App
         uses: azure/login@v2
         with:
+           app-name: azurepoc123
+           slot-name: production
+           resource-group: cfsh-cc-d-rg02
+           package: ${{ secrets.ACR_NAME }}/myapp
            creds: ${{ secrets.AZURE_CREDENTIALS }}
            username: azurepoc123
            password: ${{ secrets.pass }}
