@@ -33,11 +33,11 @@ jobs:
         uses: azure/login@v2
         with:
            creds: ${{ secrets.AZURE_CREDENTIALS }}
-           allow-no-subscriptions: true
+           # allow-no-subscriptions: true
           
       - run: |
           az account show --output none
-          # az provider register -n Microsoft.App
+          az provider register -n Microsoft.App
 
       - name: Deploy to webapp
         uses: azure/container-apps-deploy-action@v1
@@ -45,5 +45,3 @@ jobs:
            imageToDeploy: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_APP_NAME }}:${{ github.sha }}
            resourceGroup: ${{ env.Resource_Group }}
            containerAppName: ${{ env.CONTAINER_APP_NAME }}
-           environmentVariables: |
-             ASPNETCORE_ENVIRONMENT=Development
