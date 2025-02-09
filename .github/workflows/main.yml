@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
         
       - name: Login to Azure
         uses: docker/login-action@v3
@@ -30,7 +30,7 @@ jobs:
            tags: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_APP_NAME }}:${{ github.sha }}
            file: Dockerfile
       - name: Azure Login Web App
-        uses: azure/login@v4
+        uses: azure/login@v2
         with:
            creds: ${{ secrets.AZURE_CREDENTIALS }}
 
