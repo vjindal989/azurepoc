@@ -16,18 +16,16 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-          client-id: f92d07e0-c470-4941-91d6-094886115b43
-          tenant-id: 89afed49-c2fa-45ce-a866-6e77ca386cd0
+          creds: ${{ secrets.Azure_Credentials }}
 
       - name: Login to Azure Container Registry
         run: |
-          az acr login --name ${{ secrets.ACR_NAME }}
+          az acr login --name ${{ secrets.azurepoc123 }}
 
       - name: Build and Push Docker Image
         run: |
           IMAGE_TAG=latest
-          ACR_LOGIN_SERVER=${{ secrets.ACR_NAME }}.azurecr.io
+          ACR_LOGIN_SERVER=${{ secrets.azurepoc123 }}.azurecr.io
           IMAGE_NAME=$ACR_LOGIN_SERVER/myapp:$IMAGE_TAG
 
           docker build -t $IMAGE_NAME .
