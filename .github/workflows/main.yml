@@ -27,8 +27,6 @@ jobs:
         run: |
           az acr login --name ${{ secrets.ACR_NAME }}
 
-
-
   deploy:
     name: Deploy to Azure Web App
     runs-on: ubuntu-latest
