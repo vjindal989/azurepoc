@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      
 env:
   AZURE_CONTAINER_REGISTRY: azurepoc123
   Resource_Group: cfsh-cc-d-rg02
