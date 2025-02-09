@@ -21,14 +21,7 @@ jobs:
         run: |
           az acr login --name ${{ secrets.ACR_NAME }}
 
-      - name: Build and Push Docker Image
-        run: |
-          IMAGE_TAG=latest
-          ACR_LOGIN_SERVER=${{ secrets.ACR_NAME }}.azurecr.io
-          IMAGE_NAME=$ACR_LOGIN_SERVER/myapp:$IMAGE_TAG
 
-          docker build -t $IMAGE_NAME .
-          docker push $IMAGE_NAME
 
   deploy:
     name: Deploy to Azure Web App
