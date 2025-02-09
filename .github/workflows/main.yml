@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - main
+env:
+  Azure_Container_Registry: azurepoc123
+  Container_App_Name: ca_name
+  Resource_Group: cfsh-cc-d-rg02
 jobs:
   build-and-push:
     name: Build and Push Docker Image to ACR
@@ -15,7 +19,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          registry: ${{ env.Azure_Container_Registry }}.azurecr.io
+          username: ${{ secrets.user_name }}
+          password: ${{ secrets.password }}
 
       - name: Login to Azure Container Registry
         run: |
