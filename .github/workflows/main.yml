@@ -30,7 +30,7 @@ jobs:
            tags: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_APP_NAME }}:${{ github.sha }}
            file: Dockerfile
       - name: Azure Login Web App
-        uses: azure/login@v4
+        uses: azure/login@v2
         with:
            creds: ${{ secrets.AZURE_CREDENTIALS }}
 
