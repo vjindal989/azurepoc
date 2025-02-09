@@ -27,7 +27,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
            push: true
-           tags: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_APP_NAME }}:${{ github.sha }}
+           tags: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_APP_NAME }}:latest
            file: Dockerfile
       - name: Azure Login Web App
         uses: azure/login@v2
@@ -42,6 +42,6 @@ jobs:
       - name: Deploy to webapp
         uses: azure/container-apps-deploy-action@v1
         with: 
-           imageToDeploy: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_APP_NAME }}:${{ github.sha }}
+           imageToDeploy: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_APP_NAME }}:latest
            resourceGroup: ${{ env.Resource_Group }}
            containerAppName: ${{ env.CONTAINER_APP_NAME }}
