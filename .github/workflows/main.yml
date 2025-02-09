@@ -6,7 +6,7 @@ on:
 env:
   AZURE_CONTAINER_REGISTRY: azurepoc123
   Resource_Group: cfsh-cc-d-rg02
-  CONTAINER_APP_NAME: hello123
+  CONTAINER_APP_NAME: azurepoc1234
 jobs:
   build-and-deploy:
     name: Build and Push Docker Image to ACR
@@ -29,4 +29,16 @@ jobs:
            push: true
            tags: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_APP_NAME }}:${{ github.sha }}
            file: Dockerfile
+      - name: Azure Login Web App
+        uses: azure/login@v4
+        with:
+           creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy to webapp
+        uses: azure/container-apps-deploy-action@v1
+        with: 
+           imageToDeploy: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_APP_NAME }}:${{ github.sha }}
+           resourceGroup: ${{ env.Resource_Group }}
+           containerAppName: ${{ env.CONTAINER_APP_NAME }}
+           
  
