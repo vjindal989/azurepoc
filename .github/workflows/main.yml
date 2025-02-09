@@ -29,6 +29,12 @@ jobs:
            push: true
            tags: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_APP_NAME }}:${{ github.sha }}
            file: Dockerfile
+      - name: 'Az CLI login with subscription OIDC'
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENTID }}
+          tenant-id: ${{ secrets.AZURE_TENANTID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTIONID }} 
       - name: Azure Login Web App
         uses: azure/login@v2
         with:
