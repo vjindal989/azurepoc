@@ -33,7 +33,8 @@ jobs:
         uses: azure/login@v2
         with:
            creds: ${{ secrets.AZURE_CREDENTIALS }}
-           # allow-no-subscriptions: true
+           allow-no-subscriptions: true
+
           
       - run: |
           az account show --output none
