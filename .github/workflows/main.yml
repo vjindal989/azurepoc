@@ -33,6 +33,8 @@ jobs:
         uses: azure/login@v2
         with:
            creds: ${{ secrets.AZURE_CREDENTIALS }}
+           username: azurepoc123
+           password: ${{ secrets.pass }}
 
       - name: Deploy to webapp
         uses: azure/container-apps-deploy-action@v1
