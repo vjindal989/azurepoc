@@ -7,15 +7,29 @@ env:
   AZURE_CONTAINER_REGISTRY: azurepoc123
   Resource_Group: cfsh-cc-d-rg02
   CONTAINER_APP_NAME: azurepoc1234
-jobs:
-  build-and-deploy:
-    name: Build and Push Docker Image to ACR
+permissions:
+      id-token: write
+      contents: read
+jobs: 
+  az-login-test:
     runs-on: ubuntu-latest
-
-
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - name : Check Az version before installing
+        run: az --version
+        
+      - name: Installing Az CLI Edge build 
+        run: |
+           cd ../..
+           CWD="$(pwd)"
+           python3 -m venv canary-venv
+           . canary-venv/bin/activate
+           echo "***********activated virual environment**********" 
+           python3 -m pip install --upgrade pip
+           echo "***************started installing cli edge build******************"
+           pip3 install -q --upgrade --pre azure-cli --extra-index-url https://azurecliprod.blob.core.windows.net/edge --no-cache-dir --upgrade-strategy=eager
+           echo "***************installed cli Edge build*******************"    
+           echo "$CWD/canary-venv/bin" >> $GITHUB_PATH
+           az --version
         
       - name: Login to Azure
         uses: docker/login-action@v3
