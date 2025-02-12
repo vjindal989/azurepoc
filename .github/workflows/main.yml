@@ -4,7 +4,7 @@ on:
     branches:
       - main
 env:
-  AZURE_CONTAINER_REGISTRY: azurepoc123
+  AZURE_CONTAINER_REGISTRY: testingbyvasu
   Resource_Group: cfsh-cc-d-rg02
   CONTAINER_APP_NAME: hello123
 jobs:
